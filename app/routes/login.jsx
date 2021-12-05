@@ -6,9 +6,11 @@ import Button from "./../components/button"
 
 export let action = async ({request}) => {
     let formData = await request.formData();
-    let answer = formData.get("answer");
+    let email = formData.get("email");
+    let password = formData.get("password");
+    let remember = formData.get("remember");
 
-    return redirect("/demos/correct");
+    return redirect("/");
 };
 
 export let meta = () => {
