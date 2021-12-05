@@ -11,15 +11,12 @@ import {
 
 import tailwindStyles from "./tailwind.css"
 
-// https://remix.run/api/app#links
 export let links = () => {
     return [
         {rel: "stylesheet", href: tailwindStyles},
     ];
 };
 
-// https://remix.run/api/conventions#default-export
-// https://remix.run/api/conventions#route-filenames
 export default function App() {
     return (
         <Document>
@@ -30,7 +27,6 @@ export default function App() {
     );
 }
 
-// https://remix.run/docs/en/v1/api/conventions#errorboundary
 export function ErrorBoundary({error}) {
     console.error(error);
     return (
@@ -50,7 +46,6 @@ export function ErrorBoundary({error}) {
     );
 }
 
-// https://remix.run/docs/en/v1/api/conventions#catchboundary
 export function CatchBoundary() {
     let caught = useCatch();
 
