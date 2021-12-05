@@ -9,7 +9,7 @@ export let action = async ({request}) => {
     let email = formData.get("email");
     let password = formData.get("password");
     let remember = formData.get("remember");
-    let errors: [];
+    let errors = [];
 
     return redirect("/");
 };
