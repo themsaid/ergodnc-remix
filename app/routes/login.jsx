@@ -20,7 +20,7 @@ export let meta = () => {
     };
 };
 
-export default function Index() {
+export default function Login() {
     let errors = useActionData();
 
     return (
