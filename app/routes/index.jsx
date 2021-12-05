@@ -1,94 +1,78 @@
-import { useLoaderData, json, Link } from "remix";
+import {useLoaderData, Link} from "remix";
 
-// Loaders provide data to components and are only ever called on the server, so
-// you can connect to a database or run any server side code you want right next
-// to the component that renders it.
-// https://remix.run/api/conventions#loader
 export let loader = () => {
-  let data = {
-    resources: [
-      {
-        name: "Remix Docs",
-        url: "https://remix.run/docs"
-      },
-      {
-        name: "React Router Docs",
-        url: "https://reactrouter.com/docs"
-      },
-      {
-        name: "Remix Discord",
-        url: "https://discord.gg/VBePs6d"
-      }
-    ],
-    demos: [
-      {
-        to: "demos/actions",
-        name: "Actions"
-      },
-      {
-        to: "demos/about",
-        name: "Nested Routes, CSS loading/unloading"
-      },
-      {
-        to: "demos/params",
-        name: "URL Params and Error Boundaries"
-      }
-    ]
-  };
+    let offices = [
+        {
+            "images": [
+                {
+                    "path": "https://via.placeholder.com/400x400.png?text=PLACEHOLDER",
+                }
+            ],
+            "id": 1,
+            "title": "Office One",
+            "description": "Architecto assumenda cum eum. Voluptas qui dignissimos qui voluptate. Mollitia necessitatibus ut sit. Et saepe ea quo nulla.",
+            "price_per_day": 1000,
+        },
+        {
+            "images": [
+                {
+                    "path": "https://via.placeholder.com/400x400.png?text=PLACEHOLDER",
+                }
+            ],
+            "id": 2,
+            "title": "Dickenston",
+            "description": "Sit nesciunt sit a perspiciatis quas eligendi. Maxime ipsum aut nihil. Totam omnis et laudantium ut dolorum soluta.",
+            "price_per_day": 1300,
+        },
+        {
+            "images": [
+                {
+                    "path": "https://via.placeholder.com/400x400.png?text=PLACEHOLDER",
+                }
+            ],
+            "id": 3,
+            "title": "East Katlynnton",
+            "description": "Quia voluptatem amet quo minus. Repudiandae sed beatae veritatis. Error quos quia qui pariatur perferendis beatae occaecati.",
+            "price_per_day": 2100,
+        }
+    ];
+    ;
 
-  // https://remix.run/api/remix#json
-  return json(data);
+    return offices;
 };
 
-// https://remix.run/api/conventions#meta
 export let meta = () => {
-  return {
-    title: "Remix Starter",
-    description: "Welcome to remix!"
-  };
+    return {
+        title: "ergodnc",
+        description: "Welcome to ergodnc!"
+    };
 };
 
-// https://remix.run/guides/routing#index-routes
 export default function Index() {
-  let data = useLoaderData();
+    let offices = useLoaderData();
 
-  return (
-    <div className="remix__page">
-      <main>
-        <h2>Welcome to Remix!</h2>
-        <p>We're stoked that you're here. 🥳</p>
-        <p>
-          Feel free to take a look around the code to see how Remix does things,
-          it might be a bit different than what you’re used to. When you're
-          ready to dive deeper, we've got plenty of resources to get you
-          up-and-running quickly.
-        </p>
-        <p>
-          Check out all the demos in this starter, and then just delete the{" "}
-          <code>app/routes/demos</code> and <code>app/styles/demos</code>{" "}
-          folders when you're ready to turn this into your next project.
-        </p>
-      </main>
-      <aside>
-        <h2>Demos In This App</h2>
-        <ul>
-          {data.demos.map(demo => (
-            <li key={demo.to} className="remix__page__resource">
-              <Link to={demo.to} prefetch="intent">
-                {demo.name}
-              </Link>
-            </li>
-          ))}
-        </ul>
-        <h2>Resources</h2>
-        <ul>
-          {data.resources.map(resource => (
-            <li key={resource.url} className="remix__page__resource">
-              <a href={resource.url}>{resource.name}</a>
-            </li>
-          ))}
-        </ul>
-      </aside>
-    </div>
-  );
+    return (
+        <>
+            {offices.map((office, index) => (
+                <div key={office.id} className={`flex ${index + 1 == offices.length ? '' : 'pb-10 mb-10 border-b'}`}>
+                    <div className="w-1/3 h-56 relative overflow-hidden rounded-lg">
+                        <img src={office.images[0].path} className="object-cover w-full h-full"></img>
+                    </div>
+
+                    <div className="w-full pl-14">
+                        <div className="flex justify-between items-center mb-6">
+                            <h1 className="text-2xl font-bold">{office.title}</h1>
+                            <span className="block font-semibold">${office.price_per_day / 100} per day</span>
+                        </div>
+                        <p className="leading-loose mb-5">
+                            {office.description}
+                        </p>
+                        <Link to={"/offices/" + office.id} className="text-purple-600 font-bold">
+                            More details...
+                        </Link>
+                    </div>
+                </div>
+            ))}
+        </>
+    );
 }
