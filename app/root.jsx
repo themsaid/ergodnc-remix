@@ -115,11 +115,6 @@ function Layout({children}) {
                         </Link>
 
                         <div className="flex items-center text-sm font-semibold">
-                            {/*<a href="#" className="text-gray-700 hover:text-purple-700">Log Out</a>*/}
-                            {/*<Link to={"/profile"} className="text-gray-700 ml-7 border border-gray-300 hover:border-gray-400 rounded px-4 py-2">*/}
-                            {/*    Profile*/}
-                            {/*</Link>*/}
-
                             <Link to={"/login"} className="text-gray-700 hover:text-purple-700">
                                 Sign In
                             </Link>
