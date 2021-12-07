@@ -6,7 +6,7 @@
     "scripts": {
         "build": "npm run build:css && remix build",
         "build:css": "tailwindcss -o ./app/tailwind.css",
-        "dev": "concurrently \"npm run dev:css\" \"remix dev\"",
+        "dev": "concurrently \"npm run dev:css\" \"node -r dotenv/config node_modules/.bin/remix dev\"",
         "dev:css": "tailwindcss -o ./app/tailwind.css --watch",
         "postinstall": "remix setup node",
         "start": "remix-serve build"
@@ -14,6 +14,8 @@
     "dependencies": {
         "@remix-run/react": "^1.0.6",
         "@remix-run/serve": "^1.0.6",
+        "axios": "^0.24.0",
+        "dotenv": "^10.0.0",
         "react": "^17.0.2",
         "react-dom": "^17.0.2",
         "remix": "^1.0.6"
