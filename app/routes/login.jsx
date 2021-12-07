@@ -26,15 +26,16 @@ export default function Login() {
     return (
         <>
             <div className={"w-1/2 mx-auto bg-white p-5 rounded-lg"}>
-                <Errors className="mb-5" errors={errors}/>
+                <Errors className="mb-5" errors={errors || []}/>
 
-                <Form method="POST">
+                <Form method="POST" autoComplete="off">
                     <div>
                         <Label htmlFor="email">Email</Label>
 
                         <Input
                             id="email"
                             type="email"
+                            name="email"
                             className="block mt-1 w-full"
                             required
                             autoFocus
@@ -47,40 +48,21 @@ export default function Login() {
                         <Input
                             id="password"
                             type="password"
+                            name="password"
                             className="block mt-1 w-full"
                             required
                             autoComplete="current-password"
                         />
                     </div>
 
-                    <div className="block mt-4">
-                        <label
-                            htmlFor="remember_me"
-                            className="inline-flex items-center">
-                            <input
-                                id="remember_me"
-                                type="checkbox"
-                                name="remember"
-                                className="rounded border-gray-300 text-indigo-600 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-                            />
-
-                            <span className="ml-2 text-gray-600">
-                            Remember me
-                        </span>
-                        </label>
-                    </div>
-
                     <div className="flex items-center justify-end mt-4">
-                        <Link to="/forgot-password">
-                            <a className="underline text-sm text-gray-600 hover:text-gray-900">
-                                Forgot your password?
-                            </a>
+                        <Link to="/forgot-password" className="underline text-sm text-gray-600 hover:text-gray-900">
+                            Forgot your password?
                         </Link>
 
                         <Button className="ml-3">Login</Button>
                     </div>
-                </Form>
-            </div>
+                </F
         </>
     );
 }
