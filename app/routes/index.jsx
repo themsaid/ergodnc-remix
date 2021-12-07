@@ -43,8 +43,7 @@ export let loader = () => {
 
 export let meta = () => {
     return {
-        title: "ergodnc",
-        description: "Welcome to ergodnc!"
+        title: "ergodnc"
     };
 };
 
