@@ -8,7 +8,6 @@ export let action = async ({request}) => {
     let formData = await request.formData();
     let email = formData.get("email");
     let password = formData.get("password");
-    let remember = formData.get("remember");
     let errors = [];
 
     return redirect("/");
