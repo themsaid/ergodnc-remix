@@ -1,6 +1,6 @@
 import {useLoaderData, Link} from "remix";
 
-export let loader = () => {
+export let loader = async () => {
     let offices = [
         {
             "images": [
