@@ -30,7 +30,7 @@ export let loader = async ({params}) => {
         }
     ];
 
-    return reservations;
+    return {reservations, user: {name: 'Someone'}};
 };
 
 export let meta = () => {
@@ -40,12 +40,12 @@ export let meta = () => {
 };
 
 export default function Profile() {
-    let reservations = useLoaderData();
+    let {reservations, user} = useLoaderData();
 
     return (
         <>
             <h1 className="text-3xl font-black mb-10">
-                Hello There!
+                Hello {user.name}!
             </h1>
 
             <div className="mb-10">
