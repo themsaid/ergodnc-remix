@@ -4,11 +4,9 @@ export let loader = async ({params}) => {
     let reservations = [
         {
             "office": {
-                "images": [
-                    {
-                        "path": "https://via.placeholder.com/400x400.png?text=PLACEHOLDER",
-                    }
-                ],
+                "featured_image": {
+                    "path": "https://via.placeholder.com/400x400.png?text=PLACEHOLDER",
+                },
                 "id": 1,
                 "title": "Office One",
                 "description": "Architecto assumenda cum eum. Voluptas qui dignissimos qui voluptate. Mollitia necessitatibus ut sit. Et saepe ea quo nulla.",
@@ -19,11 +17,9 @@ export let loader = async ({params}) => {
         },
         {
             "office": {
-                "images": [
-                    {
-                        "path": "https://via.placeholder.com/400x400.png?text=PLACEHOLDER",
-                    }
-                ],
+                "featured_image": {
+                    "path": "https://via.placeholder.com/400x400.png?text=PLACEHOLDER",
+                },
                 "id": 2,
                 "title": "Office Wto",
                 "description": "Quia voluptatem amet quo minus. Repudiandae sed beatae veritatis. Error quos quia qui pariatur perferendis beatae occaecati.",
@@ -34,7 +30,7 @@ export let loader = async ({params}) => {
         }
     ];
 
-    return {reservations, userName: 'User'};
+    return reservations;
 };
 
 export let meta = () => {
@@ -44,12 +40,12 @@ export let meta = () => {
 };
 
 export default function Profile() {
-    let {reservations, userName} = useLoaderData();
+    let reservations = useLoaderData();
 
     return (
         <>
             <h1 className="text-3xl font-black mb-10">
-                Hello {userName}!
+                Hello There!
             </h1>
 
             <div className="mb-10">
@@ -59,7 +55,7 @@ export default function Profile() {
             {reservations.map((reservation, index) => (
                 <div key={reservation.office.id} className={`flex ${index + 1 == reservations.length ? '' : 'pb-10 mb-10 border-b'}`}>
                     <div className="w-1/3 h-56 relative overflow-hidden rounded-lg">
-                        <img src={reservation.office.images[0].path} className="object-cover w-full h-full"></img>
+                        <img src={reservation.office.featured_image.path} className="object-cover w-full h-full"></img>
                     </div>
 
 
