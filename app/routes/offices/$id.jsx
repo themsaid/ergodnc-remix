@@ -1,20 +1,11 @@
 import {useCatch, Link, json, useLoaderData} from "remix";
 import Button from '../../components/button'
+import axios from "./../../services/axios.server"
 
 export let loader = async ({params}) => {
-    let office = {
-        "images": [
-            {
-                "path": "https://via.placeholder.com/400x400.png?text=PLACEHOLDER",
-            }
-        ],
-        "id": 1,
-        "title": "Office One",
-        "description": "Architecto assumenda cum eum. Voluptas qui dignissimos qui voluptate. Mollitia necessitatibus ut sit. Et saepe ea quo nulla.",
-        "price_per_day": 1000,
-    };
+    let response = await axios.get('/offices/' + params.id);
 
-    return office;
+    return response.data.data;
 };
 
 export let meta = ({office}) => {

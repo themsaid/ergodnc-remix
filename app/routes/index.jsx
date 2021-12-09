@@ -1,44 +1,10 @@
 import {useLoaderData, Link} from "remix";
+import axios from "./../services/axios.server"
 
 export let loader = async () => {
-    let offices = [
-        {
-            "images": [
-                {
-                    "path": "https://via.placeholder.com/400x400.png?text=PLACEHOLDER",
-                }
-            ],
-            "id": 1,
-            "title": "Office One",
-            "description": "Architecto assumenda cum eum. Voluptas qui dignissimos qui voluptate. Mollitia necessitatibus ut sit. Et saepe ea quo nulla.",
-            "price_per_day": 1000,
-        },
-        {
-            "images": [
-                {
-                    "path": "https://via.placeholder.com/400x400.png?text=PLACEHOLDER",
-                }
-            ],
-            "id": 2,
-            "title": "Dickenston",
-            "description": "Sit nesciunt sit a perspiciatis quas eligendi. Maxime ipsum aut nihil. Totam omnis et laudantium ut dolorum soluta.",
-            "price_per_day": 1300,
-        },
-        {
-            "images": [
-                {
-                    "path": "https://via.placeholder.com/400x400.png?text=PLACEHOLDER",
-                }
-            ],
-            "id": 3,
-            "title": "East Katlynnton",
-            "description": "Quia voluptatem amet quo minus. Repudiandae sed beatae veritatis. Error quos quia qui pariatur perferendis beatae occaecati.",
-            "price_per_day": 2100,
-        }
-    ];
-    ;
+    let response = await axios.get('/offices');
 
-    return offices;
+    return response.data.data;
 };
 
 export let meta = () => {

@@ -3,14 +3,16 @@ import Errors from "./../components/errors"
 import Label from "./../components/label"
 import Input from "./../components/input"
 import Button from "./../components/button"
+import {login} from "./../services/auth.server"
 
 export let action = async ({request}) => {
     let formData = await request.formData();
     let email = formData.get("email");
     let password = formData.get("password");
-    let errors = [];
 
-    return redirect("/");
+    let {errors, redirector} = await login({request, email, password});
+
+    return errors || redirector;
 };
 
 export let meta = () => {
