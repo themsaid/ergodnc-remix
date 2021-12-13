@@ -55,3 +55,42 @@ export async function logout({request}) {
         }
     });
 };
+
+export async function currentToken({request}) {
+    const session = await storage.getSession(
+        request.headers.get("Cookie")
+    );
+
+    return session.get("userToken");
+}
+
+export async function user({request}) {
+    let response;
+    let token = await currentToken({request});
+
+    try {
+        response = await axios.get('/user', {
+            headers: {
+                "Authorization": "Bearer " + token
+            }
+        })
+    } catch (error) {
+        return null;
+    }
+
+    return response.data.data;
+};
+
+export async function requireGuest({request}) {
+    if (await user({request})) {
+        throw redirect("/");
+    }
+};
+
+export async function requireAuth({request}) {
+    let token = await currentToken({request});
+
+    if (!token) {
+        throw redirect("/login");
+    }
+};

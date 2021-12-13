@@ -3,9 +3,17 @@ import Errors from "./../components/errors"
 import Label from "./../components/label"
 import Input from "./../components/input"
 import Button from "./../components/button"
-import {login} from "./../services/auth.server"
+import {login, requireGuest} from "./../services/auth.server"
+
+export let loader = async ({request, params}) => {
+    await requireGuest({request});
+
+    return null;
+};
 
 export let action = async ({request}) => {
+    await requireGuest({request});
+
     let formData = await request.formData();
     let email = formData.get("email");
     let password = formData.get("password");

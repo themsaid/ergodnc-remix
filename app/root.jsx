@@ -6,10 +6,15 @@ import {
     Outlet,
     Scripts,
     ScrollRestoration,
-    useCatch, useTransition
+    useCatch, useTransition, useLoaderData
 } from "remix";
 
 import tailwindStyles from "./tailwind.css"
+import {user} from "./services/auth.server"
+
+export let loader = async ({request}) => {
+    return await user({request});
+};
 
 export let links = () => {
     return [
@@ -18,9 +23,11 @@ export let links = () => {
 };
 
 export default function App() {
+    let user = useLoaderData();
+
     return (
         <Document>
-            <Layout>
+            <Layout user={user}>
                 <Outlet/>
             </Layout>
         </Document>
@@ -101,7 +108,7 @@ function Document({children, title}) {
     );
 }
 
-function Layout({children}) {
+function Layout({children, user}) {
     let transition = useTransition();
     return (
         <>
@@ -115,12 +122,29 @@ function Layout({children}) {
                         </Link>
 
                         <div className="flex items-center text-sm font-semibold">
-                            <Link to={"/login"} className="text-gray-700 hover:text-purple-700">
-                                Sign In
-                            </Link>
-                            <Link to={"/register"} className="text-gray-700 ml-7 border border-gray-300 hover:border-gray-400 rounded px-4 py-2">
-                                Create Account
-                            </Link>
+                            {user
+                                ?
+                                <>
+                                    <form action="/logout" method="post">
+                                        <button type="submit" className="text-gray-700 hover:text-purple-700">
+                                            Log Out
+                                        </button>
+                                    </form>
+
+                                    <Link to={"/profile"} className="text-gray-700 ml-7 border border-gray-300 hover:border-gray-400 rounded px-4 py-2">
+                                        Profile
+                                    </Link>
+                                </>
+                                :
+                                <>
+                                    <Link to={"/login"} className="text-gray-700 hover:text-purple-700">
+                                        Sign In
+                                    </Link>
+                                    <Link to={"/register"} className="text-gray-700 ml-7 border border-gray-300 hover:border-gray-400 rounded px-4 py-2">
+                                        Create Account
+                                    </Link>
+                                </>
+                            }
                         </div>
                     </div>
                 </main>
